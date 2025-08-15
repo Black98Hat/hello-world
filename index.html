@@ -15,6 +15,16 @@
             font-size: 3em;
             color: #00ff99;
         }
+        #greeting {
+            font-size: 1.5em;
+            color: #dddddd;
+            margin-top: 1rem;
+        }
+        #clock {
+            font-size: 2.5em;
+            margin-top: 0.5rem;
+            letter-spacing: 0.05em;
+        }
     </style>
 
     <!-- Google Analytics -->
@@ -31,5 +41,37 @@
 <body>
     <h1>Hello, World! 🗺️</h1>
     <p>This is my first live website, made from scratch.</p>
+    <p id="greeting"></p>
+    <div id="clock"></div>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+
+            let greeting;
+            if (hours >= 5 && hours < 12) {
+                greeting = 'Good morning';
+            } else if (hours >= 12 && hours < 18) {
+                greeting = 'Good afternoon';
+            } else {
+                greeting = 'Good evening';
+            }
+
+            const timeString = now.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            const greetingEl = document.getElementById('greeting');
+            const clockEl = document.getElementById('clock');
+            if (greetingEl) greetingEl.textContent = greeting + '!';
+            if (clockEl) clockEl.textContent = timeString;
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+    </script>
 </body>
 </html>
